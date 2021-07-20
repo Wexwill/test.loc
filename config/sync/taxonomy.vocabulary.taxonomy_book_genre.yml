@@ -1,0 +1,8 @@
+uuid: c4c03a13-d754-46f1-89ba-a93d03764b39
+langcode: en
+status: true
+dependencies: {  }
+name: 'book genre'
+vid: taxonomy_book_genre
+description: ''
+weight: 0

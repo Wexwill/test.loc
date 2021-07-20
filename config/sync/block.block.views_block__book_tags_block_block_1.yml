@@ -1,0 +1,29 @@
+uuid: 1c143983-0cbf-4ad3-ae7a-151050a7ed04
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.book_tags_block
+  module:
+    - system
+    - views
+  theme:
+    - bartik
+id: views_block__book_tags_block_block_1
+theme: bartik
+region: sidebar_first
+weight: -7
+provider: null
+plugin: 'views_block:book_tags_block-block_1'
+settings:
+  id: 'views_block:book_tags_block-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: "/books\r\n/genres"
+    negate: false
