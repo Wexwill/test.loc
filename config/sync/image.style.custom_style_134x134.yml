@@ -1,0 +1,14 @@
+uuid: 8d976027-6562-4bb9-abb1-f6629fc61f3a
+langcode: en
+status: true
+dependencies: {  }
+name: custom_style_134x134
+label: 'Custom style 134x134'
+effects:
+  91e07e2d-5d11-40a3-8afa-5c5c2cf5bba9:
+    uuid: 91e07e2d-5d11-40a3-8afa-5c5c2cf5bba9
+    id: image_resize
+    weight: 1
+    data:
+      width: 134
+      height: 134
