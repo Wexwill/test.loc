@@ -1,0 +1,7 @@
+an_task_82.first_page:
+  path: 'first-page'
+  defaults:
+    _controller: '\Drupal\an_task_82\Controller\FirstPage::an_task_82_content'
+    _title: 'First Page'
+  requirements:
+    _permission: 'access content'
