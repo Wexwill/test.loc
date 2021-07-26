@@ -1,5 +1,7 @@
-name: an_task_82
-description: an_task_82
+name: an_task_95
+description: custom block
 core_version_requirement: ^8.8 || ^9
 type: module
 package: custom modules
+dependencies:
+  - block

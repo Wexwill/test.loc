@@ -1,0 +1,25 @@
+uuid: 5036d364-51fd-42b6-ada7-7a7e2f5dcb26
+langcode: en
+status: true
+dependencies:
+  module:
+    - an_task_95
+    - system
+  theme:
+    - bartik
+id: an_task_95
+theme: bartik
+region: sidebar_first
+weight: -7
+provider: null
+plugin: an_task_95
+settings:
+  id: an_task_95
+  label: an_task_95
+  provider: an_task_95
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
