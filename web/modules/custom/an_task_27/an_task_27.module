@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function an_task_27_theme($existing, $type, $theme, $path) {
+  return [
+    'an-task-27' => [
+      'variables' => [
+        'nodes' => NULL,
+        'nid' => NULL,
+      ],
+    ],
+  ];
+}

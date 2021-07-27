@@ -1,0 +1,7 @@
+an_task_27.first_page:
+  path: 'an-task-27'
+  defaults:
+    _controller: '\Drupal\an_task_27\Controller\AnTask27::anTask27Content'
+    _title: 'an_task_27'
+  requirements:
+    _permission: 'access content'
