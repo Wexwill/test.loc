@@ -8,7 +8,6 @@ function an_task_27_theme($existing, $type, $theme, $path) {
     'an-task-27' => [
       'variables' => [
         'nodes' => NULL,
-        'nid' => NULL,
       ],
     ],
   ];
