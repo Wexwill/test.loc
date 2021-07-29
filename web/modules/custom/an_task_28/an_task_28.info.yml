@@ -1,0 +1,5 @@
+name: an_task_28
+description: page with blocks
+core_version_requirement: ^8.8 || ^9
+type: module
+package: custom modules

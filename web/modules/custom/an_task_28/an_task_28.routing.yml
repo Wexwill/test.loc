@@ -1,0 +1,9 @@
+an_task_28.page:
+  path: '/an-task-28/{first}'
+  defaults:
+    _controller: '\Drupal\an_task_28\Controller\AnTask28::anTask28Content'
+    _title: 'an_task_28'
+    first: ''
+  requirements:
+    _permission: 'access content'
+    first: \d+
