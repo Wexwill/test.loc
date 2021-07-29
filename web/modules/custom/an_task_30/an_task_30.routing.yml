@@ -1,0 +1,8 @@
+an_task_28.page:
+  path: '/check-credentials'
+  defaults:
+    _controller: '\Drupal\an_task_30\Controller\AnTask30::anTask30Content'
+    _title: 'an_task_30'
+  requirements:
+    # _permission: 'access content'
+    _custom_access: '\Drupal\an_task_30\Controller\AnTask30::access'
