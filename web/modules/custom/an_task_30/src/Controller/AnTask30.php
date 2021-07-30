@@ -32,13 +32,14 @@ class AnTask30 {
    * Contains special condition for access method.
    */
   public function condition() {
-    $role = \Drupal::currentUser()->getRoles();
-    if ((floor(time() / 60) % 2 == 0) && in_array('manager', $role)) {
-      return TRUE;
+    $roles = \Drupal::currentUser()->getRoles();
+    $allowed = FALSE;
+    $is_even = (floor(time() / 60) % 2 == 0);
+    if ($is_even && in_array('manager', $roles) ||
+        !$is_even && in_array('Authenticated', $roles)) {
+      $allowed = TRUE;
     }
-    if ((floor(time() / 60) % 2 == 1) && in_array('Authenticated', $role)) {
-      return TRUE;
-    }
+    return $allowed;
   }
 
 }
