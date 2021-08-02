@@ -1,0 +1,6 @@
+name: an_task_93
+description: form
+core_version_requirement: ^8.8 || ^9
+type: module
+package: custom modules
+configure: an_task_93.admin_settings
