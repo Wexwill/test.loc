@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ *   Implementing hook function here.
+ */
+
+/**
+ * Implementing hook_entity_presave().
+ */
+function an_task_93_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node' && $entity->isNew() === TRUE) {
+    $entity->title->value = \Drupal::config('an_task_93.settings')->get('values') . ' ' . $entity->title->value;
+  }
+}

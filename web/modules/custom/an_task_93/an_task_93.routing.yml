@@ -1,0 +1,7 @@
+an_task_93.admin_settings:
+  path: '/admin/config/an_task_93'
+  defaults:
+    _form: '\Drupal\an_task_93\Form\AnTask93ConfigurationForm'
+    _title: 'an_task_93 configuration screen'
+  requirements:
+    _permission: 'administer site configuration'
