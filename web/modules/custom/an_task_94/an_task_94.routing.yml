@@ -1,0 +1,7 @@
+an_task_82.an_task_94:
+  path: '/an_task_94'
+  defaults:
+    _controller: '\Drupal\an_task_94\Controller\AnTask94::anTask94Content'
+    _title: 'An_task_94 Page'
+  requirements:
+    _permission: 'access content'
