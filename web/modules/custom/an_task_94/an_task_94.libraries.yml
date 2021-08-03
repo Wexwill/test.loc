@@ -1,0 +1,16 @@
+an_task_94_page:
+  version: 1.x
+  js:
+    js/an_task_94_page.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+an_task_94_block:
+  version: 1.x
+  js:
+    js/an_task_94_block.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings

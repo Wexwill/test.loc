@@ -1,0 +1,7 @@
+name: an_task_94
+description: block and page
+core_version_requirement: ^8.8 || ^9
+type: module
+package: custom modules
+dependencies:
+  - block
