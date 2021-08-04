@@ -1,0 +1,7 @@
+an_task_31.form:
+  path: '/an_task_31'
+  defaults:
+    _form: '\Drupal\an_task_31\Form\AnTask31Form'
+    _title: 'an_task_31 Form'
+  requirements:
+    _permission: 'access content'
