@@ -17,24 +17,16 @@ class AnTask32Form extends FormBase {
    * @return array
    *   array of taxonomy terms
    */
-  public function getTerms() {
+  public function getTerms($vocabulary) {
     $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('vid', "Country");
+    $query->condition('vid', $vocabulary);
     $tids = $query->execute();
-    $country_terms = Term::loadMultiple($tids);
-    foreach ($country_terms as $term) {
-      $terms['Country'][] = $term->name->value;
+    $terms = Term::loadMultiple($tids);
+    foreach ($terms as $term) {
+      $values[] = $term->name->value;
     }
 
-    $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('vid', "City");
-    $tids = $query->execute();
-    $city_terms = Term::loadMultiple($tids);
-    foreach ($city_terms as $term) {
-      $terms['City'][] = $term->name->value;
-    }
-
-    return $terms;
+    return $values;
   }
 
   /**
@@ -48,16 +40,16 @@ class AnTask32Form extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['country_fields'] = [
+    $form['country'] = [
       '#type' => 'select',
       '#title' => $this->t('Countries'),
-      '#options' => $this->getTerms()['Country'],
+      '#options' => $this->getTerms('Country'),
     ];
 
-    $form['city_fields'] = [
+    $form['city'] = [
       '#type' => 'select',
       '#title' => $this->t('Cities'),
-      '#options' => $this->getTerms()['City'],
+      '#options' => $this->getTerms('City'),
     ];
 
     $form['submit'] = [
@@ -72,7 +64,7 @@ class AnTask32Form extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $message = 'Country: ' . $form_state->getValue('country_fields') . ' | city: ' . $form_state->getValue('city_fields');
+    $message = 'Country: ' . $form_state->getValue('country') . ' | city: ' . $form_state->getValue('city');
     \Drupal::logger('an_task_32')->notice($message);
   }
 
