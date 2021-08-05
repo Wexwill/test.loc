@@ -43,13 +43,13 @@ class AnTask32Form extends FormBase {
     $form['country'] = [
       '#type' => 'select',
       '#title' => $this->t('Countries'),
-      '#options' => $this->getTerms('Country'),
+      '#options' => $this->getTerms('country'),
     ];
 
     $form['city'] = [
       '#type' => 'select',
       '#title' => $this->t('Cities'),
-      '#options' => $this->getTerms('City'),
+      '#options' => $this->getTerms('city'),
     ];
 
     $form['submit'] = [
