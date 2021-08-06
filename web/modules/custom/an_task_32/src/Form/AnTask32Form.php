@@ -12,28 +12,22 @@ use Drupal\taxonomy\Entity\Term;
 class AnTask32Form extends FormBase {
 
   /**
-   * Contains arrays with taxonomy terms.
+   * Contains arrays with countries.
    *
    * @return array
-   *   array of taxonomy terms
+   *   array of countries.
    */
-  public function getTerms($vocabulary, $country = '') {
+  public function getCountries($vocabulary) {
     $query = \Drupal::entityQuery('taxonomy_term');
     $query->condition('vid', $vocabulary);
-    if ($vocabulary == 'city' && !empty($country)) {
-      $query->condition('field_country.entity.name', $country);
-    }
-    else {
-      $values['empty'] = NULL;
-    }
     $tids = $query->execute();
     $terms = Term::loadMultiple($tids);
-
+    $countries['empty'] = NULL;
     foreach ($terms as $term) {
-      $values[$term->name->value] = $term->name->value;
+      $countries[$term->name->value] = $term->name->value;
     }
 
-    return $values;
+    return $countries;
   }
 
   /**
@@ -50,7 +44,7 @@ class AnTask32Form extends FormBase {
     $form['country'] = [
       '#type' => 'select',
       '#title' => $this->t('Countries'),
-      '#options' => $this->getTerms('country'),
+      '#options' => $this->getCountries('country'),
       '#ajax' => [
         'callback' => '::countryCallback',
         'event' => 'change',
@@ -61,7 +55,7 @@ class AnTask32Form extends FormBase {
     $cities = [];
     $country = $form_state->getValue('country');
     if (!empty($country)) {
-      $cities = $this->getTerms('city', $country);
+      $cities = $this->getCitiesByCountry($country);
     };
 
     $form['city'] = [
@@ -86,6 +80,25 @@ class AnTask32Form extends FormBase {
   public function countryCallback(array &$form, FormStateInterface $form_state) {
 
     return $form['city'];
+  }
+
+  /**
+   * Contains array with cities depends on selected country.
+   *
+   * @return array
+   *   array of cities.
+   */
+  public function getCitiesByCountry($country) {
+    $query = \Drupal::entityQuery('taxonomy_term');
+    $query->condition('vid', 'city');
+    $query->condition('field_country.entity.name', $country);
+    $tids = $query->execute();
+    $terms = Term::loadMultiple($tids);
+    foreach ($terms as $term) {
+      $cities[$term->name->value] = $term->name->value;
+    }
+
+    return $cities;
   }
 
   /**
