@@ -12,14 +12,14 @@ use Drupal\taxonomy\Entity\Term;
 class AnTask32Form extends FormBase {
 
   /**
-   * Contains arrays with countries.
+   * Contains array with countries from taxonomy term.
    *
    * @return array
-   *   array of countries.
+   *   Array of countries.
    */
-  public function getCountries($vocabulary) {
+  public function getCountries() {
     $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('vid', $vocabulary);
+    $query->condition('vid', 'country');
     $tids = $query->execute();
     $terms = Term::loadMultiple($tids);
     $countries['empty'] = NULL;
@@ -44,7 +44,7 @@ class AnTask32Form extends FormBase {
     $form['country'] = [
       '#type' => 'select',
       '#title' => $this->t('Countries'),
-      '#options' => $this->getCountries('country'),
+      '#options' => $this->getCountries(),
       '#ajax' => [
         'callback' => '::countryCallback',
         'event' => 'change',
@@ -76,8 +76,11 @@ class AnTask32Form extends FormBase {
 
   /**
    * Contains callback function for Country field.
+   *
+   * @return array
+   *   An associative array containing the structure of the form.
    */
-  public function countryCallback(array &$form, FormStateInterface $form_state) {
+  public function countryCallback(array &$form) {
 
     return $form['city'];
   }
@@ -85,8 +88,11 @@ class AnTask32Form extends FormBase {
   /**
    * Contains array with cities depends on selected country.
    *
+   * @param string $country
+   *   String with country name.
+   *
    * @return array
-   *   array of cities.
+   *   Array with cities.
    */
   public function getCitiesByCountry($country) {
     $query = \Drupal::entityQuery('taxonomy_term');
