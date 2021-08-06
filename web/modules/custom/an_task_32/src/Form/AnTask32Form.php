@@ -17,14 +17,14 @@ class AnTask32Form extends FormBase {
    * @return array
    *   Array of countries.
    */
-  public function getCountries() {
+  public function getCountriesList() {
     $query = \Drupal::entityQuery('taxonomy_term');
     $query->condition('vid', 'country');
     $tids = $query->execute();
     $terms = Term::loadMultiple($tids);
-    $countries['empty'] = NULL;
+    $countries[''] = 'not selected';
     foreach ($terms as $term) {
-      $countries[$term->name->value] = $term->name->value;
+      $countries[$term->id()] = $term->name->value;
     }
 
     return $countries;
@@ -44,7 +44,7 @@ class AnTask32Form extends FormBase {
     $form['country'] = [
       '#type' => 'select',
       '#title' => $this->t('Countries'),
-      '#options' => $this->getCountries(),
+      '#options' => $this->getCountriesList(),
       '#ajax' => [
         'callback' => '::countryCallback',
         'event' => 'change',
@@ -53,9 +53,9 @@ class AnTask32Form extends FormBase {
     ];
 
     $cities = [];
-    $country = $form_state->getValue('country');
-    if (!empty($country)) {
-      $cities = $this->getCitiesByCountry($country);
+    $country_id = $form_state->getValue('country');
+    if (!empty($country_id)) {
+      $cities = $this->getCitiesListByCountryId($country_id);
     };
 
     $form['city'] = [
@@ -88,20 +88,20 @@ class AnTask32Form extends FormBase {
   /**
    * Contains array with cities depends on selected country.
    *
-   * @param string $country
+   * @param string $country_id
    *   String with country name.
    *
    * @return array
    *   Array with cities.
    */
-  public function getCitiesByCountry($country) {
+  public function getCitiesListByCountryId($country_id) {
     $query = \Drupal::entityQuery('taxonomy_term');
     $query->condition('vid', 'city');
-    $query->condition('field_country.entity.name', $country);
+    $query->condition('field_country.entity.tid', $country_id);
     $tids = $query->execute();
     $terms = Term::loadMultiple($tids);
     foreach ($terms as $term) {
-      $cities[$term->name->value] = $term->name->value;
+      $cities[] = $term->name->value;
     }
 
     return $cities;
