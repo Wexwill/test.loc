@@ -122,10 +122,10 @@ class AnTask32Form extends FormBase {
     if(!empty($form_state->getValue('city'))) {
       $city_id = $form_state->getValue('city');
     }
-    if (!empty(Term::load($country_id))) {
+    if (!empty($country_id)) {
       $country_entity = Term::load($country_id);
     }
-    if (!empty(Term::load($city_id))) {
+    if (!empty($city_id)) {
       $city_entity = Term::load($city_id);
     }
     if ($country_entity instanceof Term) {
