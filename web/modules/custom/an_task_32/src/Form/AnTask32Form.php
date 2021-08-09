@@ -56,7 +56,10 @@ class AnTask32Form extends FormBase {
     $country_id = $form_state->getValue('country');
     if (!empty($country_id)) {
       $cities = $this->getCitiesListByCountryId($country_id);
-    };
+    }
+    if (!$cities) {
+      $cities[''] = 'no cities';
+    }
 
     $form['city'] = [
       '#type' => 'select',
@@ -89,7 +92,7 @@ class AnTask32Form extends FormBase {
    * Contains array with cities depends on selected country.
    *
    * @param string $country_id
-   *   String with country name.
+   *   String with country id.
    *
    * @return array
    *   Array with cities.
@@ -101,7 +104,7 @@ class AnTask32Form extends FormBase {
     $tids = $query->execute();
     $terms = Term::loadMultiple($tids);
     foreach ($terms as $term) {
-      $cities[] = $term->name->value;
+      $cities[$term->id()] = $term->name->value;
     }
 
     return $cities;
@@ -111,8 +114,8 @@ class AnTask32Form extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $country = $form_state->getValue('country');
-    $city = $form_state->getValue('city');
+    $country = $form['country']['#options'][$form_state->getValue('country')];
+    $city = $form['city']['#options'][$form_state->getValue('city')];
     $message = 'Country: ' . $country . ' | City: ' . $city;
     \Drupal::logger('an_task_32')->notice($message);
   }
