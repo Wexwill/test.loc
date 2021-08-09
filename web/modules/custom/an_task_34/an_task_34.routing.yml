@@ -1,0 +1,7 @@
+an_task_34.admin_settings:
+  path: '/admin/config/an_task_34'
+  defaults:
+    _form: '\Drupal\an_task_34\Form\AnTask34ConfigurationForm'
+    _title: 'an_task_34 configuration form'
+  requirements:
+    _permission: 'administer site configuration'
