@@ -12,21 +12,22 @@ use Drupal\taxonomy\Entity\Term;
 class AnTask32Form extends FormBase {
 
   /**
-   * Contains arrays with taxonomy terms.
+   * Contains array with countries from taxonomy term.
    *
    * @return array
-   *   array of taxonomy terms
+   *   Array of countries.
    */
-  public function getTerms($vocabulary) {
+  public function getCountriesList() {
     $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('vid', $vocabulary);
+    $query->condition('vid', 'country');
     $tids = $query->execute();
     $terms = Term::loadMultiple($tids);
+    $countries[''] = 'not selected';
     foreach ($terms as $term) {
-      $values[] = $term->name->value;
+      $countries[$term->id()] = $term->name->value;
     }
 
-    return $values;
+    return $countries;
   }
 
   /**
@@ -43,13 +44,29 @@ class AnTask32Form extends FormBase {
     $form['country'] = [
       '#type' => 'select',
       '#title' => $this->t('Countries'),
-      '#options' => $this->getTerms('country'),
+      '#options' => $this->getCountriesList(),
+      '#ajax' => [
+        'callback' => '::countryCallback',
+        'event' => 'change',
+        'wrapper' => 'edit-city',
+      ],
     ];
+
+    $cities = [];
+    $country_id = $form_state->getValue('country');
+    if (!empty($country_id)) {
+      $cities = $this->getCitiesListByCountryId($country_id);
+    }
+    if (!$cities) {
+      $cities[''] = 'no cities';
+    }
 
     $form['city'] = [
       '#type' => 'select',
       '#title' => $this->t('Cities'),
-      '#options' => $this->getTerms('city'),
+      '#options' => $cities,
+      '#prefix' => '<div id="edit-city">',
+      '#suffix' => '</div>',
     ];
 
     $form['submit'] = [
@@ -61,10 +78,63 @@ class AnTask32Form extends FormBase {
   }
 
   /**
+   * Contains callback function for Country field.
+   *
+   * @return array
+   *   An associative array containing the structure of the form.
+   */
+  public function countryCallback(array &$form) {
+
+    return $form['city'];
+  }
+
+  /**
+   * Contains array with cities depends on selected country.
+   *
+   * @param string $country_id
+   *   String with country id.
+   *
+   * @return array
+   *   Array with cities.
+   */
+  public function getCitiesListByCountryId($country_id) {
+    $query = \Drupal::entityQuery('taxonomy_term');
+    $query->condition('vid', 'city');
+    $query->condition('field_country.entity.tid', $country_id);
+    $tids = $query->execute();
+    $terms = Term::loadMultiple($tids);
+    foreach ($terms as $term) {
+      $cities[$term->id()] = $term->name->value;
+    }
+
+    return $cities;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $message = 'Country: ' . $form_state->getValue('country') . ' | city: ' . $form_state->getValue('city');
+    $country = '';
+    $city = '';
+    if(!empty($form_state->getValue('country'))) {
+      $country_id = $form_state->getValue('country');
+    }
+    if(!empty($form_state->getValue('city'))) {
+      $city_id = $form_state->getValue('city');
+    }
+    if (!empty($country_id)) {
+      $country_entity = Term::load($country_id);
+    }
+    if (!empty($city_id)) {
+      $city_entity = Term::load($city_id);
+    }
+    if ($country_entity instanceof Term) {
+      $country = $country_entity->get('name')->value;
+    }
+    if ($city_entity instanceof Term) {
+      $city = $city_entity->get('name')->value;
+    }
+    $message = 'Country: ' . $country . ' | City: ' . $city;
     \Drupal::logger('an_task_32')->notice($message);
   }
 
