@@ -116,8 +116,12 @@ class AnTask32Form extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $country = '';
     $city = '';
-    $country_id = $form_state->getValue('country');
-    $city_id = $form_state->getValue('city');
+    if(!empty($form_state->getValue('country'))) {
+      $country_id = $form_state->getValue('country');
+    }
+    if(!empty($form_state->getValue('city'))) {
+      $city_id = $form_state->getValue('city');
+    }
     if (!empty(Term::load($country_id))) {
       $country_entity = Term::load($country_id);
     }
