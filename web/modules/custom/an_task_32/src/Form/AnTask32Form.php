@@ -114,8 +114,22 @@ class AnTask32Form extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $country = $form['country']['#options'][$form_state->getValue('country')];
-    $city = $form['city']['#options'][$form_state->getValue('city')];
+    $country = '';
+    $city = '';
+    $country_id = $form_state->getValue('country');
+    $city_id = $form_state->getValue('city');
+    if (!empty(Term::load($country_id))) {
+      $country_entity = Term::load($country_id);
+    }
+    if (!empty(Term::load($city_id))) {
+      $city_entity = Term::load($city_id);
+    }
+    if ($country_entity instanceof Term) {
+      $country = $country_entity->get('name')->value;
+    }
+    if ($city_entity instanceof Term) {
+      $city = $city_entity->get('name')->value;
+    }
     $message = 'Country: ' . $country . ' | City: ' . $city;
     \Drupal::logger('an_task_32')->notice($message);
   }
