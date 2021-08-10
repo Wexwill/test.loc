@@ -1,0 +1,5 @@
+name: an_task_35
+description: module
+core_version_requirement: ^8.8 || ^9
+type: module
+package: custom modules
