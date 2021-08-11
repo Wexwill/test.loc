@@ -17,6 +17,11 @@ bootstrap:
     - core/drupal
     - core/drupalSettings
 
+new-style:
+  css:
+    theme:
+      css/new-style.css: {}
+
 # Uncomment for LESS source JavaScript files.
 #  js:
 #    bootstrap/js/affix.js: {}
