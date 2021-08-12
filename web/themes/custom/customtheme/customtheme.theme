@@ -9,11 +9,13 @@
 
 function customtheme_preprocess_html(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
-  $node_id = $node->id();
-  if ($node instanceof \Drupal\node\NodeInterface && ($node_id % 2 == 0)) {
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $node_id = $node->id();
+  }
+  if (!empty($node_id) && ($node_id % 2 == 0)) {
     $variables['attributes']['class'][] = 'day';
   }
-  if ($node instanceof \Drupal\node\NodeInterface && !($node_id % 2 == 0)) {
+  if (!empty($node_id) && !($node_id % 2 == 0)) {
     $variables['attributes']['class'][] = 'night';
   }
 }
