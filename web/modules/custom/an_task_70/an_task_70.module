@@ -1,0 +1,51 @@
+<?php
+
+/**
+* Implements hook_mail().
+*/
+function an_task_70_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = 'HELLO!';
+      $message['body'][] = $params['message'];
+      break;
+  }
+ }
+
+/**
+ * Implements hook_cron().
+ */
+function an_task_70_cron() {
+  $current_date =  \Drupal::service('date.formatter')->format(time(), 'html_date');
+
+  $userStorage = \Drupal::entityTypeManager()->getStorage('user');
+  $query = $userStorage->getQuery();
+  $uids = $query
+    ->condition('field_date_of_birth', $current_date, '=')
+    ->execute();
+  $users = $userStorage->loadMultiple($uids);
+
+  if (!empty($users)) {
+    foreach ($users as $user) {
+      $email_array[] = $user->mail->value;
+    }
+    $to_string = implode(', ', $email_array);
+  } else exit;
+  
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'an_task_70';
+  $key = 'mail';
+  $to = $to_string;
+  $params['message'] = 'Happy Birthday to You!';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+    \Drupal::messenger()->addMessage('There was a problem sending your message and it was not sent.', 'error');
+  }
+  else {
+    \Drupal::messenger()->addMessage('Your message has been sent.');
+  }
+}

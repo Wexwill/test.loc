@@ -1,0 +1,30 @@
+uuid: 28a71271-7b69-45c9-8612-6c4bfa910e95
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:a7706135-c555-4061-9021-54b6e19536dc'
+  module:
+    - block_content
+    - system
+  theme:
+    - customtheme
+id: customtheme_custom_block
+theme: customtheme
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:a7706135-c555-4061-9021-54b6e19536dc'
+settings:
+  id: 'block_content:a7706135-c555-4061-9021-54b6e19536dc'
+  label: custom_block
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /an-task-28
+    negate: false
