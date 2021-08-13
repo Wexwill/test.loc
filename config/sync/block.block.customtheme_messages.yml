@@ -1,4 +1,4 @@
-uuid: fce89f1b-573a-4dd1-a404-a5a13cd372f5
+uuid: cdc9a0aa-70ac-49a7-a0ec-eac2ed7c992d
 langcode: en
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
   theme:
     - customtheme
 _core:
-  default_config_hash: 9RnnTUBcn0WRWXfrGOnId2H0Q31uQUeu_F5TnDxl2yg
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
 id: customtheme_messages
 theme: customtheme
-region: header
-weight: -50
+region: highlighted
+weight: 0
 provider: null
 plugin: system_messages_block
 settings:

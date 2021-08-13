@@ -1,4 +1,4 @@
-uuid: e700629c-e6da-427d-8319-cbff7dc5f998
+uuid: a8791eb4-038c-47c0-8548-7b29e599ddb6
 langcode: en
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
   theme:
     - customtheme
 _core:
-  default_config_hash: fNNLN48MSGSLiqwIFywCuxH2Dk_IxDbaP0kYhg_IPrg
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
 id: customtheme_content
 theme: customtheme
 region: content

@@ -1,4 +1,4 @@
-uuid: a570b7b7-48cd-447e-9230-7d0595522f7f
+uuid: 1e97b0d5-025c-4fdc-85f1-6ce1dec6a144
 langcode: en
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
   theme:
     - customtheme
 _core:
-  default_config_hash: wDR9JKEATSWldBjw8du8s3G2zjEYeQf88nlld11hMLo
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
 id: customtheme_breadcrumbs
 theme: customtheme
-region: header
-weight: -100
+region: navigation
+weight: 0
 provider: null
 plugin: system_breadcrumb_block
 settings:
