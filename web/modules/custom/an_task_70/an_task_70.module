@@ -31,8 +31,8 @@ function an_task_70_cron() {
       $email_array[] = $user->mail->value;
     }
     $to_string = implode(', ', $email_array);
-  } else exit;
-  
+  } else return;
+
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'an_task_70';
   $key = 'mail';
