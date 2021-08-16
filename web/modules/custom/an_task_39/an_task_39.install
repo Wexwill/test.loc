@@ -1,0 +1,62 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * @file
+ * Install file for the an_task_39 module.
+ */
+ 
+/**
+ *  Create taxonomy terms for country.
+ */
+function an_task_39_update_9001() {
+  $new_terms = [
+    'Italy',
+    'Austria',
+    'Portugal',
+  ];
+  foreach ($new_terms as $new_term) {
+    $term = Term::create([
+      'vid' => 'country',
+      'name' => $new_term,
+      ]);
+    $term->save();
+  }
+}
+
+/**
+ *  Create new taxonomy terms for country.
+ */
+function an_task_39_update_9002() {
+  $new_terms = [
+    'Brazil',
+    'Argentina',
+    'Mexico',
+  ];
+  foreach ($new_terms as $new_term) {
+    $term = Term::create([
+      'vid' => 'country',
+      'name' => $new_term,
+      ]);
+    $term->save();
+  }
+}
+
+/**
+ *  Create new taxonomy terms for country v3.
+ */
+function an_task_39_update_9003() {
+  $new_terms = [
+    'Angola',
+    'Barbados',
+    'Belgium',
+  ];
+  foreach ($new_terms as $new_term) {
+    $term = Term::create([
+      'vid' => 'country',
+      'name' => $new_term,
+      ]);
+    $term->save();
+  }
+}
